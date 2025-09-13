@@ -46,9 +46,6 @@ This tool is built with simple, static files.
 ### ©️ License
 
 This work is licensed under the **Creative Commons Attribution 4.0 International (CC BY 4.0) License**.
-
-Copyright (c) 2025 HosoyaYusaku
-
 You are free to share and adapt this material for any purpose, provided you give appropriate credit. See the [LICENSE](./LICENSE) file for details.
 
 ---
@@ -99,7 +96,4 @@ HOSOモデルは、行政DXにおける個人の「信頼」を、組織で再�
 ### ©️ ライセンス
 
 この作品は**クリエイティブ・コモンズ 表示 4.0 国際 (CC BY 4.0) ライセンス**の下に提供されています。
-
-Copyright (c) 2025 HosoyaYusaku
-
 利用者は、適切なクレジットを表示すれば、営利目的でも自由に共有（複製、再配布）および改変（リミックス、変形、二次利用）することができます。詳細は [LICENSE](./LICENSE) ファイルをご確認ください。
