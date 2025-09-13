@@ -7,7 +7,6 @@
 The HOSO Model is a lightweight thinking framework for public sector digital transformation (DX), designed to connect individual "trust" to a replicable organizational "system". This repository provides an interactive web tool to see, touch, and take home the HOSO concept.
 
 ![Screenshot of the HOSO Model web tool](./hoso-model-screenshot.png)
-*(注: この部分は後ほどスクリーンショット画像へのリンクに置き換えてください)*
 
 ---
 
@@ -27,22 +26,22 @@ Experience the HOSO Model by trying out the interactive tool yourself.
 
 ### 使い方 (How to Use)
 
-1.  **Home**: Get an overview of the project and its core concept.
-2.  **Model**: Review the purpose and key points of each of the four phases: H, O1, S, and O2.
-3.  **Workshop**: Interactively create the following A4 sheets:
-    * **DX Project Charter (O1)**: To clarify the project's purpose, authority, and responsibilities.
-    * **PoC Sheet (S)**: To document the results of small-scale trials and apply learnings to the next steps.
-    * **Stakeholder Consensus Memo**: A memo to align perspectives among key parties.
-    * **Lessons Learned Sheet**: To capture insights from failures and turn them into organizational assets.
-4.  **About**: Check the license information for this project.
+1. **Home**: Get an overview of the project and its core concept.
+2. **Model**: Review the purpose and key points of each of the four phases: H, O1, S, and O2.
+3. **Workshop**: Interactively create the following A4 sheets:
+  * **DX Project Charter (O1)**: To clarify the projects purpose, authority, and responsibilities.
+  * **PoC Sheet (S)**: To document the results of small-scale trials and apply learnings to the next steps.
+  * **Stakeholder Consensus Memo**: A memo to align perspectives among key parties.
+  * **Lessons Learned Sheet**: To capture insights from failures and turn them into organizational assets.
+4. **About**: Check the license information for this project.
 
 ### 🔧 Development & Contribution
 
 This tool is built with simple, static files.
 
-1.  Fork or clone this repository.
-2.  Edit `hoso-model.html` directly.
-3.  You can review your changes simply by opening the file in your browser.
+1. Fork or clone this repository.
+2. Edit `hoso-model.html` directly.
+3. You can review your changes simply by opening the file in your browser.
 
 Suggestions for improvements and new features are welcome! Please feel free to open an Issue or a Pull Request.
 
@@ -57,7 +56,7 @@ You are free to share and adapt this material for any purpose, provided you give
 ### 👤 Author
 
 * **HosoyaYusaku**
-* **GitHub**: [@HosoyaYusaku](https://github.com/HosoyaYusaku) *(Link to your GitHub profile)*
+* **GitHub**: [@HosoyaYusaku](https://github.com/HosoyaYusaku) 
 
 ---
 <br>
@@ -71,7 +70,6 @@ You are free to share and adapt this material for any purpose, provided you give
 HOSOモデルは、行政DXにおける個人の「信頼」を、組織で再現可能な「仕組み」へとつなぐための軽量な思考フレームワークです。このリポジトリでは、その概念を**観て・触れて・持ち帰れる**インタラクティブなWebツールを提供します。
 
 ![HOSOモデルのスクリーンショット](./hoso-model-screenshot.png)
-*(注: この部分は後ほどスクリーンショット画像へのリンクに置き換えてください)*
 
 ---
 
@@ -91,22 +89,20 @@ HOSOモデルは、行政DXにおける個人の「信頼」を、組織で再�
 
 ### 使い方
 
-1.  **Home**: プロジェクトの概要とコンセプトを掴みます。
-2.  **Model**: H/O1/S/O2の各フェーズの目的や要点を確認できます。
-3.  **Workshop**: 以下のA4シートを対話形式で作成できます。
-    * **DX課題仕様書（O1）**: プロジェクトの目的・権限・責任を明確にします。
-    * **PoCシート（S）**: 小さな試行の結果を記録し、学びを次に繋げます。
-    * **三者の“納得”メモ**: 関係者の目線を合わせるための合意メモです。
-    * **教訓シート**: 失敗から学びを得て、組織の資産とするための記録です。
-4.  **About**: このプロジェクトのライセンス情報を確認できます。
+1. **Home**: プロジェクトの概要とコンセプトを掴みます。
+2. **Model**: H/O1/S/O2の各フェーズの目的や要点を確認できます。
+3. **Workshop**: 以下のA4シートを対話形式で作成できます。
+  * **DX課題仕様書（O1）**: プロジェクトの目的・権限・責任を明確にします。
+  * **PoCシート（S）**: 小さな試行の結果を記録し、学びを次に繋げます。
+  * **三者の“納得”メモ**: 関係者の目線を合わせるための合意メモです。
+  * **教訓シート**: 失敗から学びを得て、組織の資産とするための記録です。
+4. **About**: このプロジェクトのライセンス情報を確認できます。
 
 ### 🔧 開発・貢献
 
-このツールはシンプルな静的ファイルで構成されています。
-
-1.  このリポジトリをフォークまたはクローンします。
-2.  `hoso-model.html` を直接編集します。
-3.  ブラウザでファイルを開くだけで、変更内容を確認できます。
+1. このリポジトリをフォークまたはクローンします。
+2. `hoso-model.html` を直接編集します。
+3. ブラウザでファイルを開くだけで、変更内容を確認できます。
 
 改善提案や機能追加のアイデアがあれば、IssueやPull Requestをお待ちしています！
 
@@ -121,4 +117,4 @@ Copyright (c) 2025 HosoyaYusaku
 ### 👤 作者
 
 * **HosoyaYusaku**
-* **GitHub**: [@HosoyaYusaku](https://github.com/HosoyaYusaku) (ご自身のGitHubプロフへのリンクを想定)
+* **GitHub**: [@HosoyaYusaku](https://github.com/HosoyaYusaku) 
