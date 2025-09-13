@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>思考フレーム-HOSO（包装）モデル | 行政DXフレームワーク</title>
+    <meta name="description" content="行政DXのためのHOSO（包装）モデル。H→O1→S→O2の循環を、誰もが“観て・触れて・持ち帰れる”体験として。" />
+    <meta name="theme-color" content="#1E2D3D" />
+    <meta property="og:title" content="思考フレーム-HOSO（包装）モデル" />
+    <meta property="og:description" content="信頼を仕組みに包む、行政DXの軽量フレームワーク。" />
+    <meta property="og:type" content="website" />
+    <style>
+      :root {
+        --ink: #101418;
+        --bg: #f7f6f3;
+        --paper: #ffffff;
+        --brand: #1e2d3d;
+        --leaf: #2e7d32;
+        --amber: #b87333;
+        --muted: #5c6b73;
+        --line: #e6e1d9;
+        --focus: 3px solid #2e7d32;
+        --radius: 16px;
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        --shadow-soft: 0 6px 16px rgba(0, 0, 0, 0.05);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #f2f2f2;
+          --bg: #0f1419;
+          --paper: #0f1b22;
+          --brand: #9ec2df;
+          --leaf: #8cd28f;
+          --amber: #e1a56a;
+          --muted: #a8b3bd;
+          --line: #22303a;
+          --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+          --shadow-soft: 0 6px 16px rgba(0, 0, 0, 0.25);
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Sans", "Noto Sans JP", "Yu Gothic UI", "YuGothic", "Meiryo", sans-serif;
+        color: var(--ink);
+        background: radial-gradient(1200px 800px at 80% -200px, rgba(46, 125, 50, 0.1), transparent 60%), var(--bg);
+        line-height: 1.7;
+      }
+      a {
+        color: var(--leaf);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .skip-link {
+        position: absolute;
+        left: -9999px;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      }
+      .skip-link:focus {
+        position: fixed;
+        left: 16px;
+        top: 16px;
+        width: auto;
+        height: auto;
+        background: var(--paper);
+        color: var(--ink);
+        padding: 8px 12px;
+        border-radius: 10px;
+        outline: var(--focus);
+        z-index: 10000;
+      }
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        backdrop-filter: blur(8px);
+        background: color-mix(in oklab, var(--bg) 80%, transparent);
+        border-bottom: 1px solid var(--line);
+      }
+      .wrap {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        height: 64px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+        color: var(--brand);
+      }
+      .brand .logo {
+        width: 26px;
+        height: 26px;
+        min-width: 26px;
+        border-radius: 50%;
+        background: conic-gradient(from 0deg, var(--leaf), var(--brand), var(--leaf));
+        filter: saturate(120%);
+        box-shadow: inset 0 0 0 3px color-mix(in oklab, var(--paper) 70%, transparent);
+        animation: breathe 6s ease-in-out infinite;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .brand .logo {
+          animation: none;
+        }
+      }
+      @keyframes breathe {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.06);
+        }
+      }
+      nav a {
+        color: var(--ink);
+        font-weight: 600;
+        padding: 8px 10px;
+        border-radius: 10px;
+      }
+      nav a[aria-current="page"] {
+        background: color-mix(in oklab, var(--leaf) 12%, transparent);
+        color: var(--leaf);
+      }
+      .hero {
+        padding: 48px 0 28px;
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 28px;
+        align-items: center;
+      }
+      .hero h1 {
+        font-size: clamp(28px, 4vw, 40px);
+        margin: 0 0 12px;
+        letter-spacing: 0.2px;
+        color: var(--brand);
+      }
+      .hero p.lead {
+        font-size: clamp(16px, 2.2vw, 19px);
+        margin-top: 0;
+        color: var(--muted);
+      }
+      .ring {
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+        position: relative;
+        background: radial-gradient(circle at 50% 50%, color-mix(in oklab, var(--leaf) 20%, transparent), transparent 55%);
+        box-shadow: var(--shadow-soft);
+      }
+      .ring svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .ring .spark {
+        stroke: var(--amber);
+        stroke-width: 3;
+        stroke-linecap: round;
+        filter: drop-shadow(0 0 6px color-mix(in oklab, var(--amber) 70%, transparent));
+      }
+      main {
+        padding-bottom: 80px;
+      }
+      section.route {
+        display: none;
+      }
+      section.route[aria-hidden="false"] {
+        display: block;
+      }
+      .card {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 18px;
+      }
+      .grid {
+        display: grid;
+        gap: 18px;
+      }
+      .stepper {
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        gap: 18px;
+      }
+      .steps {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        overflow: hidden;
+      }
+      .steps button {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+        padding: 12px 14px;
+        background: none;
+        border: none;
+        text-align: left;
+        cursor: pointer;
+        color: var(--ink);
+        border-bottom: 1px solid var(--line);
+      }
+      .steps button:last-child {
+        border-bottom: none;
+      }
+      .steps button[aria-current="step"] {
+        background: color-mix(in oklab, var(--leaf) 10%, transparent);
+        color: var(--leaf);
+        font-weight: 700;
+      }
+      .step-body {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 18px;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: color-mix(in oklab, var(--leaf) 12%, transparent);
+        color: var(--leaf);
+        border: 1px solid color-mix(in oklab, var(--leaf) 36%, transparent);
+        border-radius: 999px;
+        padding: 4px 10px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.4px;
+        text-transform: uppercase;
+      }
+      .workshop {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        align-items: start;
+      }
+      .form {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 18px;
+      }
+      .form h3 {
+        margin-top: 0;
+      }
+      label span.small {
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .field {
+        display: grid;
+        gap: 6px;
+        margin-bottom: 12px;
+      }
+      input[type="text"],
+      input[type="date"],
+      input[type="number"],
+      textarea,
+      select {
+        width: 100%;
+        padding: 10px 12px;
+        background: color-mix(in oklab, var(--paper) 92%, transparent);
+        border: 1px solid var(--line);
+        color: var(--ink);
+        border-radius: 12px;
+        outline: none;
+        box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.02);
+      }
+      textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+      .actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        cursor: pointer;
+        appearance: none;
+        border: 1px solid var(--line);
+        background: var(--paper);
+        color: var(--ink);
+        padding: 10px 14px;
+        border-radius: 12px;
+        font-weight: 700;
+      }
+      .btn.primary {
+        background: var(--leaf);
+        color: #fff;
+        border-color: color-mix(in oklab, var(--leaf) 50%, black);
+      }
+      .preview {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 0;
+        overflow: auto;
+        display: grid;
+      }
+      .sheet {
+        padding: 28px 34px;
+        max-width: 820px;
+        margin: 0 auto;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        font-kerning: normal;
+      }
+      .sheet h2 {
+        color: var(--brand);
+        margin: 0 0 12px;
+        letter-spacing: 0.2px;
+      }
+      .sheet .subtitle {
+        color: var(--muted);
+        margin: -2px 0 10px;
+        font-size: 14px;
+      }
+      .sheet .kv {
+        display: grid;
+        grid-template-columns: 180px 1fr;
+        gap: 10px;
+        align-items: start;
+        border-bottom: 1px solid var(--line);
+        padding: 8px 0;
+      }
+      .sheet .kv .k {
+        color: var(--muted);
+        font-weight: 600;
+      }
+      .sheet .kv > :last-child {
+        white-space: pre-wrap;
+        word-break: keep-all;
+        overflow-wrap: anywhere;
+        line-break: strict;
+      }
+      .sheet .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(260px, 1fr));
+        gap: 16px;
+      }
+      .sheet .hr {
+        height: 1px;
+        background: var(--line);
+        margin: 10px 0;
+      }
+      @media (max-width: 920px) {
+        .sheet .grid-2 {
+          grid-template-columns: 1fr;
+        }
+      }
+      .note {
+        color: var(--muted);
+        font-size: 13px;
+      }
+      footer {
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        padding: 28px 0;
+      }
+      @media print {
+        @page {
+          size: A4;
+          margin: 15mm;
+        }
+        body {
+          background: #fff;
+        }
+        header,
+        nav,
+        .hero,
+        .no-print {
+          display: none !important;
+        }
+        main {
+          padding: 0;
+        }
+        section.route {
+          display: block !important;
+        }
+        .preview {
+          border: none;
+          box-shadow: none;
+        }
+        .sheet {
+          max-width: unset;
+          margin: 0;
+          padding: 0;
+        }
+        .sheet h2 {
+          margin-top: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#main" class="skip-link">本文へスキップ</a>
+    <header aria-label="サイトナビゲーション">
+      <div class="wrap nav">
+        <div class="brand" aria-label="サイト名">
+          <div class="logo" aria-hidden="true"></div>
+          <span>思考フレーム-HOSO（包装）モデル</span>
+        </div>
+        <nav aria-label="ページ">
+          <a href="#/" data-route-link>Home</a>
+          <a href="#/model" data-route-link>Model</a>
+          <a href="#/workshop" data-route-link>Workshop</a>
+          <a href="#/about" data-route-link>About</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="wrap" tabindex="-1">
+      <section id="route-home" class="route" data-route="/" aria-hidden="true">
+        <div class="hero">
+          <div>
+            <h1>信頼を、仕組みに包む。</h1>
+            <p class="lead">H→O1→S→O2の循環で、個人に溜まった「信頼」を、誰でも再現できる「仕組み」へ。行政DXの軽量フレームワーク <strong>思考フレーム-HOSO（包装）モデル</strong> を、観て・触れて・持ち帰れます。</p>
+            <p class="no-print"><a class="btn primary" href="#/workshop" data-route-link>3分ではじめる</a> <a class="btn" href="#/model" data-route-link>モデルを観る</a></p>
+          </div>
+          <div class="ring" role="img" aria-label="循環を象るアニメーション">
+            <svg viewBox="0 0 100 100" aria-hidden="true">
+              <defs>
+                <linearGradient id="grad" x1="0" x2="1" y1="0" y2="1">
+                  <stop offset="0%" stop-color="var(--leaf)" />
+                  <stop offset="100%" stop-color="var(--brand)" />
+                </linearGradient>
+              </defs>
+              <circle cx="50" cy="50" r="36" fill="none" stroke="url(#grad)" stroke-width="2" opacity="0.5" />
+              <circle cx="50" cy="50" r="36" fill="none" stroke="url(#grad)" stroke-width="8" stroke-dasharray="270 270" stroke-dashoffset="0" opacity="0.08" />
+              <path class="spark" d="M50 14 L50 8" />
+              <circle cx="80" cy="50" r="2" fill="var(--amber)" opacity="0.7"><animate attributeName="opacity" values="0.2;0.8;0.2" dur="3s" repeatCount="indefinite" /></circle>
+              <g fill="var(--leaf)" opacity="0.35">
+                <circle cx="30" cy="24" r="1" />
+                <circle cx="20" cy="44" r="1" />
+                <circle cx="32" cy="68" r="1" />
+                <circle cx="56" cy="78" r="1" />
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <div class="grid" style="grid-template-columns: 1fr; align-items: start">
+          <div class="card">
+            <p class="badge">HOSO Cycle</p>
+            <h2 style="margin-top: 8px">四つの相：H / O1 / S / O2</h2>
+            <p>HOSOは、<strong>H：Honest Innovator</strong>、<strong>O1：Opportunity Assignment</strong>、<strong>S：Show & Socialize</strong>、<strong>O2：Organize & Scale</strong> の循環で動きます。まずは <a href="#/model" data-route-link>モデル</a> で全体像を掴み、<a href="#/workshop" data-route-link>工房</a>でA4一枚から始められます。</p>
+            <p class="note">
+              物語にするとこうなります。はじまりは <strong>Honest Innovator</strong>──なぜその判断に至ったかを語れ、間違いから学び続ける人。次に経営が「この課題を、この権限で、正式に託す」と決める <strong>O1</strong>。託された人は小さく手を動かし、試作品で周囲の「なるほど！」を生む──それが
+              <strong>S</strong>。うまくいった営みをルールや手順に編み込み、誰でも再現できるように広げるのが <strong>O2</strong>。この小さな循環を重ねるほど、信頼は仕組みへと育っていきます。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="route-model" class="route" data-route="/model" aria-hidden="true">
+        <h2>Model — 観る</h2>
+        <div class="stepper" role="tablist" aria-label="HOSO ステッパー">
+          <div class="steps" id="steps">
+            <button role="tab" aria-selected="true" aria-controls="panel-h" aria-current="step" data-step="h"><span class="badge">H</span> Honest Innovator（知的に誠実な担い手）</button>
+            <button role="tab" aria-selected="false" aria-controls="panel-o1" data-step="o1"><span class="badge">O1</span> Opportunity Assignment（適格者への職務の割り当て）</button>
+            <button role="tab" aria-selected="false" aria-controls="panel-s" data-step="s"><span class="badge">S</span> Show & Socialize（手を動かす・価値の社会化）</button>
+            <button role="tab" aria-selected="false" aria-controls="panel-o2" data-step="o2"><span class="badge">O2</span> Organize & Scale（制度化・拡張）</button>
+          </div>
+          <div class="step-body" id="step-body">
+            <article id="panel-h" role="tabpanel">
+              <h3>H｜Honest Innovator</h3>
+              <p><strong>説明できる判断</strong>を積み重ね、誤りを修正する記録を残す人。信頼の始点です。</p>
+              <ul>
+                <li>判断プロセスの見える化（起案・修正・撤回の履歴）</li>
+                <li>他部署との調整実績（事実記録）</li>
+                <li>匿名「三行実話」による証拠補強</li>
+              </ul>
+              <p class="note">人柄ではなく、<em>説明可能性</em>を信頼の単位に。</p>
+            </article>
+            <article id="panel-o1" role="tabpanel" hidden>
+              <h3>O1｜Opportunity Assignment</h3>
+              <p>課題・権限・責任・成功定義を<strong>A4一枚</strong>で合意し、正式な職務として割り当てます。</p>
+              <ul>
+                <li>目的・権限・責任・制約・関係者・成功/失敗定義</li>
+                <li>レベル感（A：組織横断、B：部署内、C：個人/チーム）</li>
+              </ul>
+            </article>
+            <article id="panel-s" role="tabpanel" hidden>
+              <h3>S｜Show & Socialize</h3>
+              <p>最小の「動く証拠」を作り、関係者の目線を揃えます。</p>
+              <ul>
+                <li>安心して試せる環境（切り離し・ロールバック・記録）</li>
+                <li>まずは軽い道具（Excel関数/マクロ、許可済みRPA、JavaScriptやPythonなどの実行環境）</li>
+                <li>PoCシート：仮説、範囲、Before→After、考察、次の一手</li>
+              </ul>
+            </article>
+            <article id="panel-o2" role="tabpanel" hidden>
+              <h3>O2｜Organize & Scale</h3>
+              <p>成功をルールと手順に落とし、いつでも誰でも再現可能に。硬すぎず、柔らかすぎず。</p>
+              <ul>
+                <li>ゆるい標準 → 価値評価 → 安全装置 → 担い手への報い</li>
+                <li>成功事例データベース、定期報告会、横展開の窓口</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="route-workshop" class="route" data-route="/workshop" aria-hidden="true">
+        <h2>Workshop — 造る</h2>
+        <p class="note">左のフォームに入力すると、右にA4レイアウトで即時反映されます。ボタンからPDFとして保存できます。</p>
+
+        <div class="workshop">
+          <form class="form" id="form-o1" autocomplete="on">
+            <h3>DX課題仕様書（O1）</h3>
+            <div class="field">
+              <label>案件名<input type="text" id="o1-title" placeholder="例：ペーパーレス化の作業" /></label>
+            </div>
+            <div class="grid-2">
+              <div class="field">
+                <label>期限<input type="date" id="o1-deadline" /></label>
+              </div>
+              <div class="field">
+                <label
+                  >レベル<select id="o1-level">
+                    <option value="A">A 組織横断</option>
+                    <option value="B" selected>B 部署内</option>
+                    <option value="C">C 個人/チーム</option>
+                  </select></label
+                >
+              </div>
+            </div>
+            <div class="field">
+              <label>目的<textarea id="o1-purpose" placeholder="例：紙の文書を減らす"></textarea></label>
+            </div>
+            <div class="grid-2">
+              <div class="field">
+                <label>権限<textarea id="o1-authority" placeholder="例：庁内文書は首長。性質によって法令で定められているものもある"></textarea></label>
+              </div>
+              <div class="field">
+                <label>責任<textarea id="o1-responsibility" placeholder="例：総合計画実行計画に明記"></textarea></label>
+              </div>
+            </div>
+            <div class="grid-2">
+              <div class="field">
+                <label>制約<textarea id="o1-constraints" placeholder="例：書面保管義務があるものは書面が必要"></textarea></label>
+              </div>
+              <div class="field">
+                <label>関係者<textarea id="o1-stakeholders" placeholder="例：文書担当課（文書管理の規程）、契約担当課（契約文書の規程）、会計課（会計事務の規程）"></textarea></label>
+              </div>
+            </div>
+            <div class="field">
+              <label>成功/失敗の定義<textarea id="o1-success" placeholder="例：紙→電子移行率、処理時間、エラー率／評価タイミング"></textarea></label>
+            </div>
+            <div class="field">
+              <label>求められるアクション<textarea id="o1-actions" placeholder="例：旧様式廃止の周知、説明会、操作ガイド整備"></textarea></label>
+            </div>
+            <div class="field">
+              <label>後ろ盾<textarea id="o1-support" placeholder="例：文書担当部長、契約担当部長、首長、議会"></textarea></label>
+            </div>
+            <div class="actions">
+              <button class="btn primary" type="button" data-print="#sheet-o1" data-filename="DX課題仕様書（O1）">PDFとして保存</button>
+              <button class="btn" type="button" data-clear="o1">入力をクリア</button>
+            </div>
+          </form>
+
+          <div class="preview" aria-live="polite">
+            <div class="sheet" id="sheet-o1">
+              <h2>DX課題仕様書（O1）</h2>
+              <p class="subtitle">課題・権限・責任・成功定義を一枚で合意するための雛形</p>
+              <div class="kv">
+                <div class="k">案件名</div>
+                <div id="pv-o1-title">—</div>
+              </div>
+              <div class="grid-2">
+                <div class="kv">
+                  <div class="k">期限</div>
+                  <div id="pv-o1-deadline">—</div>
+                </div>
+                <div class="kv">
+                  <div class="k">レベル</div>
+                  <div id="pv-o1-level">B（部署内）</div>
+                </div>
+              </div>
+              <div class="kv">
+                <div class="k">目的</div>
+                <div id="pv-o1-purpose">—</div>
+              </div>
+              <div class="grid-2">
+                <div class="kv">
+                  <div class="k">権限</div>
+                  <div id="pv-o1-authority">—</div>
+                </div>
+                <div class="kv">
+                  <div class="k">責任</div>
+                  <div id="pv-o1-responsibility">—</div>
+                </div>
+              </div>
+              <div class="grid-2">
+                <div class="kv">
+                  <div class="k">制約</div>
+                  <div id="pv-o1-constraints">—</div>
+                </div>
+                <div class="kv">
+                  <div class="k">関係者</div>
+                  <div id="pv-o1-stakeholders">—</div>
+                </div>
+              </div>
+              <div class="kv">
+                <div class="k">成功/失敗の定義</div>
+                <div id="pv-o1-success">—</div>
+              </div>
+              <div class="kv">
+                <div class="k">求められるアクション</div>
+                <div id="pv-o1-actions">—</div>
+              </div>
+              <div class="kv">
+                <div class="k">後ろ盾</div>
+                <div id="pv-o1-support">—</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="workshop" style="margin-top: 24px">
+          <form class="form" id="form-poc" autocomplete="on">
+            <h3>PoCシート（S）</h3>
+            <div class="grid-2">
+              <div class="field">
+                <label>案件名<input type="text" id="poc-title" placeholder="例：ペーパーレス化の効果検証" /></label>
+              </div>
+              <div class="field">
+                <label
+                  >期間<select id="poc-period">
+                    <option>1か月</option>
+                    <option selected>2か月</option>
+                    <option>3か月</option>
+                  </select></label
+                >
+              </div>
+            </div>
+            <div class="field">
+              <label>仮説<textarea id="poc-hypo" placeholder="例：電子化で受付〜決裁の平均時間を○%短縮できる"></textarea></label>
+            </div>
+            <div class="field">
+              <label>試した範囲<textarea id="poc-scope" placeholder="例：○課の申請2種で2週間"></textarea></label>
+            </div>
+            <div class="grid-2">
+              <div class="field">
+                <label>Before（数値）<textarea id="poc-before" placeholder="例：平均○分、エラー○件/週"></textarea></label>
+              </div>
+              <div class="field">
+                <label>After（数値）<textarea id="poc-after" placeholder="例：平均○分、エラー○件/週"></textarea></label>
+              </div>
+            </div>
+            <div class="field">
+              <label>考察<textarea id="poc-findings" placeholder="例：移行率を下げる要因の分析"></textarea></label>
+            </div>
+            <div class="field">
+              <label>次の一手<textarea id="poc-next" placeholder="例：全庁展開前に操作説明動画を用意"></textarea></label>
+            </div>
+            <div class="actions">
+              <button class="btn primary" type="button" data-print="#sheet-poc" data-filename="PoCシート（S）">PDFとして保存</button>
+              <button class="btn" type="button" data-clear="poc">入力をクリア</button>
+            </div>
+          </form>
+          <div class="preview" aria-live="polite">
+            <div class="sheet" id="sheet-poc">
+              <h2>PoCシート（S）</h2>
+              <p class="subtitle">試行の結果を1〜3か月のスパンで記録するための雛形</p>
+              <div class="grid-2">
+                <div class="kv">
+                  <div class="k">案件名</div>
+                  <div id="pv-poc-title">—</div>
+                </div>
+                <div class="kv">
+                  <div class="k">期間</div>
+                  <div id="pv-poc-period">2か月</div>
+                </div>
+              </div>
+              <div class="kv">
+                <div class="k">仮説</div>
+                <div id="pv-poc-hypo">—</div>
+              </div>
+              <div class="kv">
+                <div class="k">試した範囲</div>
+                <div id="pv-poc-scope">—</div>
+              </div>
+              <div class="grid-2">
+                <div class="kv">
+                  <div class="k">Before（数値）</div>
+                  <div id="pv-poc-before">—</div>
+                </div>
+                <div class="kv">
+                  <div class="k">After（数値）</div>
+                  <div id="pv-poc-after">—</div>
+                </div>
+              </div>
+              <div class="kv">
+                <div class="k">考察</div>
+                <div id="pv-poc-findings">—</div>
+              </div>
+              <div class="kv">
+                <div class="k">次の一手</div>
+                <div id="pv-poc-next">—</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="workshop" style="margin-top: 24px">
+          <form class="form" id="form-consent" autocomplete="on">
+            <h3>三者の“納得”メモ</h3>
+            <div class="grid-2">
+              <div class="field">
+                <label>業務部署<textarea id="con-biz" placeholder="作業時間が〇分短縮、ミスが〇件減"></textarea></label>
+              </div>
+              <div class="field">
+                <label>経営層<textarea id="con-exec" placeholder="コスト削減、公平性の向上"></textarea></label>
+              </div>
+            </div>
+            <div class="field">
+              <label>実行者<textarea id="con-doer" placeholder="手順のわかりやすさ、負担感"></textarea></label>
+            </div>
+            <div class="actions">
+              <button class="btn primary" type="button" data-print="#sheet-consent" data-filename="三者の納得メモ">PDFとして保存</button>
+              <button class="btn" type="button" data-clear="consent">入力をクリア</button>
+            </div>
+          </form>
+          <div class="preview">
+            <div class="sheet" id="sheet-consent">
+              <h2>三者の“納得”メモ</h2>
+              <p class="subtitle">業務・経営・実行者の視点で合意を整えるための雛形</p>
+              <div class="kv">
+                <div class="k">業務部署</div>
+                <div id="pv-con-biz">—</div>
+              </div>
+              <div class="kv">
+                <div class="k">経営層</div>
+                <div id="pv-con-exec">—</div>
+              </div>
+              <div class="kv">
+                <div class="k">実行者</div>
+                <div id="pv-con-doer">—</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="workshop" style="margin-top: 24px">
+          <form class="form" id="form-failure" autocomplete="on">
+            <h3>教訓シート</h3>
+            <div class="grid-2">
+              <div class="field">
+                <label
+                  >分類<select id="fail-type">
+                    <option>目的逸脱</option>
+                    <option>権限不足</option>
+                    <option>データ不備</option>
+                    <option>心理抵抗</option>
+                  </select></label
+                >
+              </div>
+              <div class="field">
+                <label>発生日<input type="date" id="fail-date" /></label>
+              </div>
+            </div>
+            <div class="field">
+              <label>事実のみの記録<textarea id="fail-facts" placeholder="誰が・いつ・何をしたか"></textarea></label>
+            </div>
+            <div class="actions">
+              <button class="btn primary" type="button" data-print="#sheet-failure" data-filename="教訓シート">PDFとして保存</button>
+              <button class="btn" type="button" data-clear="failure">入力をクリア</button>
+            </div>
+          </form>
+          <div class="preview">
+            <div class="sheet" id="sheet-failure">
+              <h2>教訓シート</h2>
+              <p class="subtitle">失敗から学びを抽出し、次の循環へ渡すための雛形</p>
+              <div class="grid-2">
+                <div class="kv">
+                  <div class="k">分類</div>
+                  <div id="pv-fail-type">目的逸脱</div>
+                </div>
+                <div class="kv">
+                  <div class="k">発生日</div>
+                  <div id="pv-fail-date">—</div>
+                </div>
+              </div>
+              <div class="kv">
+                <div class="k">事実のみの記録</div>
+                <div id="pv-fail-facts">—</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="route-about" class="route" data-route="/about" aria-hidden="true">
+        <h2>About</h2>
+        <div class="card">
+          <p>
+            思考フレーム-HOSO（包装）モデルは、行政DXにおける「信頼を仕組みに接続する」ための軽量な思考道具です。<br />ライセンス：<strong><a href="https://creativecommons.org/licenses/by/4.0/deed.ja" target="_blank" rel="noopener">CC BY 4.0</a></strong
+            >（表記いただければ自由に再配布・改変できます）。
+          </p>
+          <p>クレジット表記例：「思考フレーム-HOSOモデル ©<a href="https://github.com/HosoyaYusaku" target="_blank" rel="noopener">OfficeHosoya</a>（<a href="https://creativecommons.org/licenses/by/4.0/deed.ja" target="_blank" rel="noopener">CC BY 4.0</a>）」</p>
+        </div>
+      </section>
+
+      <footer>
+        <div class="wrap">
+          <small>© HOSO model. <a href="https://creativecommons.org/licenses/by/4.0/deed.ja" target="_blank" rel="noopener">CC BY 4.0</a>. このページは依存の少ない静的HTML/CSS/JSで構築されています。</small>
+        </div>
+      </footer>
+    </main>
+
+    <script>
+      const $ = (sel, root = document) => root.querySelector(sel);
+      const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+      const routes = ["/", "/model", "/workshop", "/about"];
+      function setRoute(path) {
+        routes.forEach((r) => {
+          const sec = document.querySelector(`[data-route="${r}"]`);
+          const active = r === path;
+          if (sec) sec.setAttribute("aria-hidden", String(!active));
+          $$("a[data-route-link]").forEach((a) => {
+            const href = new URL(a.href).hash.replace("#", "");
+            a.setAttribute("aria-current", href === path ? "page" : "false");
+          });
+        });
+        window.scrollTo(0, 0);
+        $("#main")?.focus();
+      }
+      function parseHash() {
+        const raw = location.hash.replace("#", "");
+        const path = raw || "/";
+        return routes.includes(path) ? path : "/";
+      }
+      window.addEventListener("hashchange", () => setRoute(parseHash()));
+      setRoute(parseHash());
+      $$("a[data-route-link]").forEach((a) => a.addEventListener("click", () => window.scrollTo(0, 0)));
+
+      const panels = { h: $("#panel-h"), o1: $("#panel-o1"), s: $("#panel-s"), o2: $("#panel-o2") };
+      function showStep(key) {
+        Object.entries(panels).forEach(([k, el]) => {
+          el.hidden = k !== key;
+        });
+        $$("#steps button").forEach((btn) => {
+          const on = btn.dataset.step === key;
+          btn.setAttribute("aria-current", on ? "step" : "false");
+          btn.setAttribute("aria-selected", String(on));
+        });
+      }
+      $$("#steps button").forEach((btn) => btn.addEventListener("click", () => showStep(btn.dataset.step)));
+      $("#steps").addEventListener("keydown", (e) => {
+        const order = ["h", "o1", "s", "o2"];
+        const active = order.findIndex((k) => panels[k] && !panels[k].hidden);
+        if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+          const next = order[Math.min(order.length - 1, active + 1)];
+          showStep(next);
+          e.preventDefault();
+        } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+          const prev = order[Math.max(0, active - 1)];
+          showStep(prev);
+          e.preventDefault();
+        }
+      });
+
+      const bindMap = [
+        ["o1-title", "pv-o1-title"],
+        ["o1-deadline", "pv-o1-deadline", (v) => (v ? new Date(v).toLocaleDateString("ja-JP") : "—")],
+        ["o1-level", "pv-o1-level", (v) => ({ A: "A（組織横断）", B: "B（部署内）", C: "C（個人/チーム）" }[v] || "—")],
+        ["o1-purpose", "pv-o1-purpose"],
+        ["o1-authority", "pv-o1-authority"],
+        ["o1-responsibility", "pv-o1-responsibility"],
+        ["o1-constraints", "pv-o1-constraints"],
+        ["o1-stakeholders", "pv-o1-stakeholders"],
+        ["o1-success", "pv-o1-success"],
+        ["o1-actions", "pv-o1-actions"],
+        ["o1-support", "pv-o1-support"],
+        ["poc-title", "pv-poc-title"],
+        ["poc-period", "pv-poc-period"],
+        ["poc-hypo", "pv-poc-hypo"],
+        ["poc-scope", "pv-poc-scope"],
+        ["poc-before", "pv-poc-before"],
+        ["poc-after", "pv-poc-after"],
+        ["poc-findings", "pv-poc-findings"],
+        ["poc-next", "pv-poc-next"],
+        ["con-biz", "pv-con-biz"],
+        ["con-exec", "pv-con-exec"],
+        ["con-doer", "pv-con-doer"],
+        ["fail-type", "pv-fail-type"],
+        ["fail-date", "pv-fail-date", (v) => (v ? new Date(v).toLocaleDateString("ja-JP") : "—")],
+        ["fail-facts", "pv-fail-facts"],
+      ];
+
+      const storageKey = "hoso-a4-maker-v3";
+      const store = JSON.parse(localStorage.getItem(storageKey) || "{}");
+      function setPV(id, value) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.textContent = value && String(value).trim() ? value : "—";
+      }
+
+      bindMap.forEach(([src, dst, mapFn]) => {
+        const input = document.getElementById(src);
+        if (!input) return;
+        const saved = store[src];
+        if (saved !== undefined) input.value = saved;
+        const initVal = input.value || "";
+        setPV(dst, mapFn ? mapFn(initVal) : initVal);
+        ["input", "change"].forEach((evt) =>
+          input.addEventListener(evt, () => {
+            const v = input.value;
+            setPV(dst, mapFn ? mapFn(v) : v);
+            store[src] = v;
+            localStorage.setItem(storageKey, JSON.stringify(store));
+          })
+        );
+      });
+
+      $$("[data-clear]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const prefix = btn.getAttribute("data-clear");
+          bindMap
+            .filter(([src]) => src.startsWith(prefix))
+            .forEach(([src, dst, mapFn]) => {
+              const input = document.getElementById(src);
+              if (input) input.value = "";
+              setPV(dst, mapFn ? mapFn("") : "");
+              delete store[src];
+            });
+          localStorage.setItem(storageKey, JSON.stringify(store));
+        });
+      });
+
+      function printSheetAsPDF(selector, filename) {
+        const sheet = document.querySelector(selector);
+        if (!sheet) return;
+        const w = window.open("", "_blank");
+        const title = filename || document.title;
+        w.document.write(
+          `<!doctype html><html lang="ja"><head><meta charset="utf-8"><title>${title}</title><style>@page{size:A4; margin:15mm}body{font-family: system-ui,-apple-system,\"Segoe UI\",Roboto,\"Hiragino Sans\",\"Noto Sans JP\",\"Yu Gothic UI\",\"YuGothic\",Meiryo,sans-serif; color:#111}.sheet{max-width:unset; margin:0; padding:0}.kv{display:grid; grid-template-columns:180px 1fr; gap:10px; align-items:start; border-bottom:1px solid #ddd; padding:8px 0}.kv .k{color:#666; font-weight:600}.grid-2{display:grid; grid-template-columns:repeat(2, minmax(260px,1fr)); gap:16px}@media (max-width:920px){.grid-2{grid-template-columns:1fr}}.subtitle{color:#666; font-size:12pt; margin:0 0 10px}h2{margin:0 0 8px}</style></head><body></body></html>`
+        );
+        const clone = sheet.cloneNode(true);
+        w.document.body.appendChild(clone);
+        w.document.close();
+        w.focus();
+        w.print();
+      }
+
+      $$("[data-print]").forEach((btn) =>
+        btn.addEventListener("click", () => {
+          const targetSel = btn.getAttribute("data-print");
+          const filename = btn.getAttribute("data-filename");
+          printSheetAsPDF(targetSel, filename);
+        })
+      );
+
+      showStep("h");
+    </script>
+  </body>
+</html>
