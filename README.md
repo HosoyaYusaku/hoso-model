@@ -55,11 +55,6 @@ Copyright (c) 2025 HosoyaYusaku
 
 You are free to share and adapt this material for any purpose, provided you give appropriate credit. See the [LICENSE](./LICENSE) file for details.
 
-### 👤 Author
-
-* **HosoyaYusaku**
-* **GitHub**: [@HosoyaYusaku](https://github.com/HosoyaYusaku) 
-
 ---
 <!-- Avoid unnecessary <br> here -->
 
@@ -117,8 +112,3 @@ HOSOモデルは、行政DXにおける個人の「信頼」を、組織で再�
 Copyright (c) 2025 HosoyaYusaku
 
 利用者は、適切なクレジットを表示すれば、営利目的でも自由に共有（複製、再配布）および改変（リミックス、変形、二次利用）することができます。詳細は [LICENSE](./LICENSE) ファイルをご確認ください。
-
-### 👤 作者
-
-* **HosoyaYusaku**
-* **GitHub**: [@HosoyaYusaku](https://github.com/HosoyaYusaku)
