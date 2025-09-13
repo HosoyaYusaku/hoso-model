@@ -17,6 +17,7 @@ The HOSO Model is a lightweight thinking framework for public sector digital tra
 - **Works Offline**: Once loaded, the tool can be used without an internet connection.
 - **Accessible Design**: Features a user-friendly interface with dark mode support and considerations for keyboard navigation.
 - **Open License (CC BY 4.0)**: Freely remix, transform, and build upon the material, even for commercial purposes, as long as you give appropriate credit.
+- **💾 Auto-Save & Privacy**: Your work is automatically saved in your browser's LocalStorage. This data is stored only on your device and is never sent to any server.
 
 ### 🚀 Live Demo
 
@@ -69,6 +70,7 @@ HOSOモデルは、行政DXにおける個人の「信頼」を、組織で再�
 - **オフライン動作**: 一度ページを開けば、オフライン環境でもツールを利用できます。
 - **アクセシブルな設計**: ダークモード対応やキーボード操作への配慮など、使いやすさを意識したデザインです。
 - **オープンライセンス（CC BY 4.0）**: クレジットを表記すれば、営利目的でも誰でも自由に改変・再配布が可能です。
+- **💾 自動保存とプライバシー**: 入力内容はブラウザのローカルストレージ（LocalStorage）に自動保存されます。データはあなたのPC上にのみ保存され、サーバーに送信されることは一切ありません。
 
 ### 🚀 デモ
 
