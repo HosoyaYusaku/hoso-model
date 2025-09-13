@@ -22,7 +22,7 @@ The HOSO Model is a lightweight thinking framework for public sector digital tra
 
 Experience the HOSO Model by trying out the interactive tool yourself.
 
-**[▶ Try the Live Demo](https://your-github-username.github.io/hoso-model/)** _(Replace this URL after activating GitHub Pages)_
+**[▶ Try the Live Demo]([https://your-github-username.github.io/hoso-model/](https://hosoyayusaku.github.io/hoso-model/))** 
 
 ### 使い方 (How to Use)
 
@@ -83,7 +83,7 @@ HOSO モデルは、行政 DX における個人の「信頼」を、組織で�
 
 実際にツールを触って、HOSO モデルを体験してみてください。
 
-**[▶ Live Demo はこちら](https://your-github-username.github.io/hoso-model/)** _(この URL は GitHub Pages を有効化した後にあなたのものに書き換えてください)_
+**[▶ Live Demo はこちら]([https://your-github-username.github.io/hoso-model/](https://hosoyayusaku.github.io/hoso-model/))** 
 
 ### 使い方
 
